@@ -22,12 +22,12 @@ jobs:
 
           docker login -u $DOCKER_USER -p $DOCKER_PASS
 
-          docker build --build-arg branch=$BRANCH --build-arg version="$VERSION" -t mamut3d/$CIRCLE_PROJECT_REPONAME:$TAG ./docker
-          docker push mamut3d/$CIRCLE_PROJECT_REPONAME:$TAG
+          docker build --build-arg branch=$BRANCH --build-arg version="$VERSION" -t $DOCKERHUB_REPO/$CIRCLE_PROJECT_REPONAME:$TAG .
+          docker push $DOCKERHUB_REPO/$CIRCLE_PROJECT_REPONAME:$TAG
 
           if [ "$LATEST" == "$CIRCLE_TAG" ]; then
-            docker tag mamut3d/$CIRCLE_PROJECT_REPONAME:$TAG mamut3d/$CIRCLE_PROJECT_REPONAME:latest
-            docker push mamut3d/$CIRCLE_PROJECT_REPONAME:latest
+            docker tag $DOCKERHUB_REPO/$CIRCLE_PROJECT_REPONAME:$TAG $DOCKERHUB_REPO/$CIRCLE_PROJECT_REPONAME:latest
+            docker push $DOCKERHUB_REPO/$CIRCLE_PROJECT_REPONAME:latest
           fi
 deployment:
   fake_deploy_for_cci2:
