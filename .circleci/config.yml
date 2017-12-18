@@ -6,7 +6,7 @@ jobs:
         - /.*/
     docker:
       - image: docker:stable
-    working_directory: "/root/$CIRCLE_PROJECT_REPONAME"
+    working_directory: /root/working_directory
     steps:
       - run: apk add --no-cache git openssh
       - checkout
